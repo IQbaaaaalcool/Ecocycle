@@ -1,0 +1,42 @@
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZjIwYTk4LTg3MzctNDYyOC04NmE1LTk5YmViYjhiMzI5NSIsIm5hbWUiOiJNdWhhbW1hZCBGYWRsaSIsImVtYWlsIjoiaXdhbkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5ODE5ODE0MywiZXhwIjoxNjk4MjAxNzQzfQ.ICewTscVXhJtz-vtNhgMa2LnYJNdiRSVqjcOZJEMADM
+###
+GET http://127.0.0.1:5000/article
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "nik": "35516636551",
+    "name": "Muhammad Fadli",
+    "email": "iwan@gmail.com",
+    "password": "admin123",
+    "confPassword": "admin123",
+    "role": ""
+}
+
+###
+POST http://localhost:5000/admin
+Content-Type: application/json
+
+{
+    "nik": "31713037638236",
+    "name": "Muhammad Fadli",
+    "email": "iwan@gmail.com",
+    "password": "admin123",
+    "confPassword": "admin123",
+    "role": ""
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "iwan@gmail.com",
+    "password": "admin123"
+}
+
+###
+DELETE http://localhost:5000/logout
