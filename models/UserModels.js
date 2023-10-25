@@ -46,6 +46,12 @@ const Users = db.define('users',{
         validate:{
             notEmpty: true
         }
+    },
+    resetPasswordToken: {
+        type: DataTypes.STRING, // Kolom untuk menyimpan token reset password
+    },
+    resetPasswordExpires: {
+        type: DataTypes.DATE, // Kolom untuk menyimpan waktu kadaluwarsa token
     }
 },{
     freezeTableName: true,

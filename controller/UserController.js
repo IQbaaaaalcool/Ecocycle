@@ -1,6 +1,7 @@
 import Users from "../models/UserModels.js";
 import bcrypt from "bcrypt";
 import argon2 from "argon2";
+import { verifyToken } from "./Auth.js";
 
 export const getUsers = async(req, res) => {
     try {
@@ -8,6 +9,7 @@ export const getUsers = async(req, res) => {
             attributes: ['id','nik','name','email','role']
         });
         res.status(200).json(response);
+        verifyToken;
     } catch (error) {
         res.status(500).json({msg: error.message})
     }

@@ -1,5 +1,6 @@
 GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhZjIwYTk4LTg3MzctNDYyOC04NmE1LTk5YmViYjhiMzI5NSIsIm5hbWUiOiJNdWhhbW1hZCBGYWRsaSIsImVtYWlsIjoiaXdhbkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTY5ODE5ODE0MywiZXhwIjoxNjk4MjAxNzQzfQ.ICewTscVXhJtz-vtNhgMa2LnYJNdiRSVqjcOZJEMADM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkZjc0ZjYzLTkwMzEtNDAyNy1hMWQ4LWI0MzUwZjAwYjdjZSIsIm5hbWUiOiJpcWJhbCIsImVtYWlsIjoic2VzZXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTgyMTI4OTEsImV4cCI6MTY5ODIxNjQ5MX0.WpQZyK65KJqkKexGG4r_qAfrLtnhkp4_SQHlcosd74Y
+
 ###
 GET http://127.0.0.1:5000/article
 
@@ -9,8 +10,8 @@ Content-Type: application/json
 
 {
     "nik": "35516636551",
-    "name": "Muhammad Fadli",
-    "email": "iwan@gmail.com",
+    "name": "fadli",
+    "email": "fadli@gmail.com",
     "password": "admin123",
     "confPassword": "admin123",
     "role": ""
@@ -34,9 +35,26 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "iwan@gmail.com",
-    "password": "admin123"
+    "name": "fadli",
+    "password": "123"
 }
 
 ###
-DELETE http://localhost:5000/logout
+POST http://localhost:5000/forgot
+Content-Type: application/json
+
+{
+    "email": "seses@gmail.com"
+}
+
+###
+POST http://localhost:5000/reset
+Content-Type: application/json
+
+{
+    "token": "b07ef03e0393c51ece5e68cd43d7ac2b4af3fd33",
+    "newPassword": "123"
+}
+
+###
+DELETE http://localhost:5000/logout 
