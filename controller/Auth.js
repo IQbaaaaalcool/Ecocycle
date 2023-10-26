@@ -11,7 +11,7 @@ export const Login = async (req, res) =>{
       }
   });
   if(!user) return res.status(404).json({msg: "User tidak ditemukan"});
-  const match = await (user.password, req.body.password);
+  const match = await argon2.verify(user.password, req.body.password);
   if(!match) return res.status(400).json({msg: "Wrong Password"});
   const userId = req.session.userId = user.id;   
   const id = userId;
@@ -115,7 +115,8 @@ export const resetPassword = async (req, res) => {
   const user = await Users.findOne({ where: { resetPasswordToken: token } });
   if (user) {
     // Reset password
-    user.password = newPassword;
+    const hashedPassword = await argon2.hash(newPassword);
+    user.password = hashedPassword;
     user.resetPasswordToken = null; // Invalidasi token
     await user.save();
 
@@ -124,6 +125,33 @@ export const resetPassword = async (req, res) => {
     res.status(404).json({ message: 'Invalid or expired token' });
   }
 }
+
+// export const resetPassword = async (req, res) => {
+//   const { token, newPassword } = req.body;
+
+//   try {
+//     const user = await Users.findOne({ where: { resetPasswordToken: token } });
+
+//     if (user) {
+//       // Verifikasi apakah token masih berlaku (misalnya, token belum kadaluwarsa)
+//       if (user.resetPasswordExpires > Date.now()) {
+//         // Reset password
+//         user.password = newPassword;
+//         user.resetPasswordToken = null; // Invalidasi token
+//         await user.save();
+
+//         return res.status(200).json({ message: 'Password reset successful' });
+//       } else {
+//         return res.status(400).json({ message: 'Expired token. Please request a new one.' });
+//       }
+//     } else {
+//       return res.status(404).json({ message: 'Invalid token. Password reset failed.' });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: 'An error occurred while resetting the password.' });
+//   }
+// }
 
 export const logOut = async (req, res) => {
   const userId = req.session.userId; // Mengambil ID pengguna dari sesi sebelum menghancurkan sesi

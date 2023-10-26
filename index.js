@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
-import db from "./config/Database.js";
 import session from "express-session";
-import UserRoute from "./routes/userRoute.js";
-import AuthRoute from "./routes/AuthRoute.js";
 import SequelizeStore from "connect-session-sequelize";
 import dotenv from "dotenv";
+import db from "./config/Database.js";
+import AuthRoute from "./routes/AuthRoute.js";
+import UserRoute from "./routes/userRoute.js";
 import ArtikelRoute from "./routes/ArtikelRoute.js";
 dotenv.config();
 
@@ -33,7 +33,7 @@ app.use(session({
 }));
 app.use(cors({
     credentials: true,
-    origin: ['http://192.168.1.9:3000','http://localhost:3000','http://192.168.231.151:3000'],
+    origin: ['http://192.168.1.9:3000','http://192.168.1.9','http://192.168.231.147','http://192.168.231.151','http://192.168.231.151:3000'],
     methods: 'GET,POST,PATCH,DELETE',
     allowedHeaders: 'Content-Type, Authorization'
 }));

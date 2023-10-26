@@ -33,9 +33,6 @@ const Pengajuan = db.define('Pengajuan',{
     role:{
         type: DataTypes.STRING,
         allowNull: false,
-        validate:{
-            notEmpty: true
-        }
     }
 },{
     freezeTableName: true,

@@ -52,6 +52,10 @@ const Users = db.define('users',{
     },
     resetPasswordExpires: {
         type: DataTypes.DATE, // Kolom untuk menyimpan waktu kadaluwarsa token
+    },
+    alamat: {
+        type: DataTypes.STRING,
+        allowNull: true,
     }
 },{
     freezeTableName: true,

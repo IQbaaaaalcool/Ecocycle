@@ -1,8 +1,7 @@
 GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNkZjc0ZjYzLTkwMzEtNDAyNy1hMWQ4LWI0MzUwZjAwYjdjZSIsIm5hbWUiOiJpcWJhbCIsImVtYWlsIjoic2VzZXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTgyMTI4OTEsImV4cCI6MTY5ODIxNjQ5MX0.WpQZyK65KJqkKexGG4r_qAfrLtnhkp4_SQHlcosd74Y
-
+Authorization: Bearer 
 ###
-GET http://127.0.0.1:5000/article
+GET http://127.0.0.1:5000/blog
 
 ###
 POST http://localhost:5000/users
@@ -10,8 +9,8 @@ Content-Type: application/json
 
 {
     "nik": "35516636551",
-    "name": "fadli",
-    "email": "fadli@gmail.com",
+    "name": "maulana",
+    "email": "maulana@gmail.com",
     "password": "admin123",
     "confPassword": "admin123",
     "role": ""
@@ -22,7 +21,6 @@ POST http://localhost:5000/admin
 Content-Type: application/json
 
 {
-    "nik": "31713037638236",
     "name": "Muhammad Fadli",
     "email": "iwan@gmail.com",
     "password": "admin123",
@@ -35,7 +33,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "name": "fadli",
+    "name": "Muhammad Fadli",
     "password": "123"
 }
 
@@ -44,7 +42,7 @@ POST http://localhost:5000/forgot
 Content-Type: application/json
 
 {
-    "email": "seses@gmail.com"
+    "email": "iwan@gmail.com"
 }
 
 ###
@@ -52,7 +50,7 @@ POST http://localhost:5000/reset
 Content-Type: application/json
 
 {
-    "token": "b07ef03e0393c51ece5e68cd43d7ac2b4af3fd33",
+    "token": "ab11761c94e2bb40f55d3dda7a7612792dfd0f53",
     "newPassword": "123"
 }
 

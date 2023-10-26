@@ -53,7 +53,6 @@ export const createAdmin = async (req, res) => {
     const { name, email, password, confPassword, role } = req.body;
     if (password !== confPassword) return res.status(400).json({ msg: "Password atau Confirm password salah" });
     const hashPassword = await argon2.hash(password);
-    // const refreshToken = uuidv4(); // Membuat nilai acak untuk refresh_token
     try {
         await Users.create({
             name: name,

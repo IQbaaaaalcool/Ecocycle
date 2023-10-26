@@ -3,7 +3,7 @@ import { jsonData } from "../controller/ArticleController.js";
 
 const router = express.Router();
 
-router.get('/article', (req, res) => {
+router.get('/blog', (req, res) => {
     res.json(jsonData);
 });
 
