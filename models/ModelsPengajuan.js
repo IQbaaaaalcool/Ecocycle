@@ -1,42 +1,45 @@
 import {Sequelize} from "sequelize";
 import db from "../config/Database.js";
+import Users from "./UserModels.js";
 
 const {DataTypes} = Sequelize;
 
 const Pengajuan = db.define('Pengajuan',{
     id:{
         primaryKey: true,
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.UUIDV4, // Gunakan UUID versi 4
+        primaryKey: true,
     },
-    name:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty: true,
-            len: [3, 100]
-        }
+    harga_sampah:{
+        type: DataTypes.STRING
     },
-    email:{
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate:{
-            notEmpty: true,
-            isEmail: true
-        }
-    },
-    password:{
+    banyak_sampah_kg:{
         type: DataTypes.STRING,
         allowNull: false,
         validate:{
             notEmpty: true
         }
     },
-    role:{
-        type: DataTypes.STRING,
+    metode_pembayaran:{
+        type: DataTypes.ENUM('cod','dana','gopay'),
         allowNull: false,
+        validate:{
+            notEmpty: true
+        }
+    },
+    biaya_akomodasi:{
+        type: DataTypes.STRING
+    },
+    total_harga:{
+        type: DataTypes.STRING
     }
 },{
     freezeTableName: true,
     timestamps: true
 });
+
+Users.hasMany(Pengajuan, { foreignKey: 'userId', as: 'pengajuan'});
+Pengajuan.belongsTo(Users, { foreignKey: 'userId', as: 'user' });
 
 export default Pengajuan;

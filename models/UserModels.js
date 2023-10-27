@@ -56,6 +56,9 @@ const Users = db.define('users',{
     alamat: {
         type: DataTypes.STRING,
         allowNull: true,
+    },
+    saldo_poin: {
+        type: DataTypes.STRING
     }
 },{
     freezeTableName: true,

@@ -7,5 +7,5 @@ const jsonData = {
       {"id": 3, "name": "Pedagang membuang sampah di antara sampah plastik di Tempat Pelelangan Ikan (TPI) Pasie Nan Tigo Padang, Sumatera Barat, Kamis (26/10/2023). Sampah plastik bekas pembungkus ikan tersebut berserakan dan bertumpuk di sekitaran pantai yang terdapat TPI dan pasar tradisional Banda Aia. ANTARA FOTO/Iggoy el Fitra/rwa."},
     ]
 };
-  
+
 export { jsonData };

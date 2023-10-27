@@ -24,23 +24,10 @@ export const Login = async (req, res) =>{
 
 export const verifyToken = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  // const token = authHeader && authHeader.split(' ')[1];
+  const token = req.headers.authorization;
   
   const queryToken = req.query.token;
-
-  // if (queryToken) {
-  //   // Anda dapat memverifikasi token ini seperti yang dilakukan dalam middleware
-  //   // jwt.verify(queryToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-  //   //    if (err) {
-  //   //        return res.sendStatus(403);
-  //   //    }
-  //   //    req.user = decoded;
-  //   //    next();
-  //   // });
-
-  //   // Atau jika Anda ingin memanfaatkan token query string sebagai cara bypass, Anda dapat mengabaikan verifikasi
-  //   // Ini hanya untuk pengujian dan pengembangan, tidak dianjurkan dalam produksi
-  // }
 
   if (!token) {
     return res.sendStatus(401);
@@ -53,20 +40,6 @@ export const verifyToken = async (req, res, next) => {
   } catch (err) {
     return res.sendStatus(403);
   }
-  // const token = req.headers.authorization; // Atau cara lain di mana Anda mengirim token
-
-  // if (token == null) {
-  //   return res.sendStatus(401); // Unauthorized
-  // }
-
-  // jwt.verify(token, 'process.env.ACCESS_TOKEN_SECRET', (err, user) => {
-  //   if (err) {
-  //     return res.sendStatus(403); // Forbidden
-  //   }
-  //   req.user = user; // Menyimpan informasi pengguna dalam objek req untuk digunakan di endpoint lain
-  //   next();
-  // });
-
 };
 
 export const forgotPassword = async (req, res) => {
@@ -154,8 +127,7 @@ export const resetPassword = async (req, res) => {
 // }
 
 export const logOut = async (req, res) => {
-  const userId = req.session.userId; // Mengambil ID pengguna dari sesi sebelum menghancurkan sesi
-  // Mengambil informasi pengguna berdasarkan ID pengguna sebelum sesi dihancurkan
+  const userId = req.session.userId;
   const user = await Users.findOne({ where: { id: userId } });
   req.session.destroy((err) => {
     if (err) {

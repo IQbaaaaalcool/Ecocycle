@@ -1,5 +1,4 @@
 GET http://localhost:5000/users
-Authorization: Bearer 
 ###
 GET http://127.0.0.1:5000/blog
 
@@ -33,8 +32,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "name": "Muhammad Fadli",
-    "password": "123"
+    "name": "maulana",
+    "password": "admin123"
 }
 
 ###
@@ -52,6 +51,15 @@ Content-Type: application/json
 {
     "token": "ab11761c94e2bb40f55d3dda7a7612792dfd0f53",
     "newPassword": "123"
+}
+
+###
+POST http://localhost:5000/pengajuan
+Content-Type: application/json
+
+{
+    "banyak_sampah_kg": 5,
+    "metode_pembayaran": "gopay"
 }
 
 ###

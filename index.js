@@ -7,6 +7,7 @@ import db from "./config/Database.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import UserRoute from "./routes/userRoute.js";
 import ArtikelRoute from "./routes/ArtikelRoute.js";
+import PengajuanRoute from "./routes/PengajuanRoute.js";
 dotenv.config();
 
 const app = express();
@@ -40,6 +41,7 @@ app.use(cors({
 app.use(UserRoute);
 app.use(AuthRoute);
 app.use(ArtikelRoute);
+app.use(PengajuanRoute);
 
 app.listen(PORT, () => {
     console.log(`Server berjalan pada IP ${IP_BACKEND}:${PORT}`);
