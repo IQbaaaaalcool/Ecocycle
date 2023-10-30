@@ -40,6 +40,10 @@ const Users = db.define('users',{
             notEmpty: true
         }
     },
+    
+    no_hp:{
+        type: DataTypes.STRING,
+    },
     role:{
         type: DataTypes.STRING,
         allowNull: false,

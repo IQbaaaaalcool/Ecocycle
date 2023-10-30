@@ -3,13 +3,13 @@ GET http://localhost:5000/users
 GET http://127.0.0.1:5000/blog
 
 ###
-POST http://localhost:5000/users
+POST http://localhost:5000/register
 Content-Type: application/json
 
 {
     "nik": "35516636551",
-    "name": "maulana",
-    "email": "maulana@gmail.com",
+    "name": "iwan",
+    "email": "iwan@gmail.com",
     "password": "admin123",
     "confPassword": "admin123",
     "role": ""
@@ -32,8 +32,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "name": "maulana",
-    "password": "admin123"
+    "name": "iwan",
+    "password": "123"
 }
 
 ###
@@ -49,17 +49,22 @@ POST http://localhost:5000/reset
 Content-Type: application/json
 
 {
-    "token": "ab11761c94e2bb40f55d3dda7a7612792dfd0f53",
+    "token": "19fcff3a7b735746156719acdcf247ccf1fd0623",
     "newPassword": "123"
 }
 
+###
+GET  http://localhost:5000/pengajuan
+
+###
+GET  http://localhost:5000/pengajuans
 ###
 POST http://localhost:5000/pengajuan
 Content-Type: application/json
 
 {
-    "banyak_sampah_kg": 5,
-    "metode_pembayaran": "gopay"
+    "banyak_sampah_kg": 13,
+    "metode_pembayaran": "cod"
 }
 
 ###

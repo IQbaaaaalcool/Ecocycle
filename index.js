@@ -31,13 +31,14 @@ app.use(session({
     cookie: {
         secure: 'auto'
     }
-}));
+}));    
 app.use(cors({
     credentials: true,
-    origin: ['http://192.168.1.9:3000','http://192.168.1.9','http://192.168.231.147','http://192.168.231.151','http://192.168.231.151:3000'],
+    origin: ['http://192.168.1.9:3000','http://localhost:3000','http://192.168.1.9','http://192.168.231.147','http://192.168.231.151','http://192.168.231.151:3000','http://192.168.54.151:3000'],
     methods: 'GET,POST,PATCH,DELETE',
     allowedHeaders: 'Content-Type, Authorization'
 }));
+
 app.use(UserRoute);
 app.use(AuthRoute);
 app.use(ArtikelRoute);

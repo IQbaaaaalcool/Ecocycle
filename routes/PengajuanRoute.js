@@ -1,9 +1,10 @@
 import express from "express";
-import { createPengajuan } from "../controller/PengajuanController.js";
-import { verifyToken } from "../controller/Auth.js";
+import { getRiwayatSendiri,getRiwayatSampah, createPengajuan } from "../controller/PengajuanController.js";
 
 const router = express.Router();
 
-router.post('/pengajuan',verifyToken, createPengajuan);
+router.get('/pengajuan', getRiwayatSampah);
+router.get('/pengajuans', getRiwayatSampah);
+router.post('/pengajuan', createPengajuan);
 
 export default router

@@ -1,44 +1,43 @@
 import Users from "../models/UserModels.js";
 import { createTransport } from 'nodemailer';
 import argon2 from "argon2";
-import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
-export const Login = async (req, res) =>{
-  const user = await Users.findOne({
-      where: {
-          name: req.body.name
-      }
-  });
-  if(!user) return res.status(404).json({msg: "User tidak ditemukan"});
-  const match = await argon2.verify(user.password, req.body.password);
-  if(!match) return res.status(400).json({msg: "Wrong Password"});
-  const userId = req.session.userId = user.id;   
-  const id = userId;
-  const name = user.name;
-  const email = user.email;
-  const role = user.role;
-  const token = jwt.sign({ id, name, email, role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-  res.status(200).json({id, name, email, role, token});
-}
-
-export const verifyToken = async (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  // const token = authHeader && authHeader.split(' ')[1];
-  const token = req.headers.authorization;
-  
-  const queryToken = req.query.token;
-
-  if (!token) {
-    return res.sendStatus(401);
-  }
+export const Login = async (req, res) => {
+  const { name, password } = req.body;
 
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    return res.sendStatus(403);
+    // Mencari pengguna berdasarkan nama pengguna
+    const user = await Users.findOne({
+      where: {
+        name: name,
+      },
+    });
+
+    // Jika pengguna tidak ditemukan, kirim respons 404
+    if (!user) {
+      return res.status(404).json({ msg: "User tidak ditemukan" });
+    }
+
+    // Memverifikasi kata sandi
+    const isPasswordValid = await argon2.verify(user.password, password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ msg: "Wrong Password" });
+    }
+
+    // Jika autentikasi berhasil, simpan ID pengguna di sesi
+    req.session.userId = user.id;
+
+    // Kirim respons dengan informasi pengguna yang berhasil login
+    res.status(200).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    });
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ msg: "Internal Server Error" });
   }
 };
 
@@ -98,33 +97,6 @@ export const resetPassword = async (req, res) => {
     res.status(404).json({ message: 'Invalid or expired token' });
   }
 }
-
-// export const resetPassword = async (req, res) => {
-//   const { token, newPassword } = req.body;
-
-//   try {
-//     const user = await Users.findOne({ where: { resetPasswordToken: token } });
-
-//     if (user) {
-//       // Verifikasi apakah token masih berlaku (misalnya, token belum kadaluwarsa)
-//       if (user.resetPasswordExpires > Date.now()) {
-//         // Reset password
-//         user.password = newPassword;
-//         user.resetPasswordToken = null; // Invalidasi token
-//         await user.save();
-
-//         return res.status(200).json({ message: 'Password reset successful' });
-//       } else {
-//         return res.status(400).json({ message: 'Expired token. Please request a new one.' });
-//       }
-//     } else {
-//       return res.status(404).json({ message: 'Invalid token. Password reset failed.' });
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({ message: 'An error occurred while resetting the password.' });
-//   }
-// }
 
 export const logOut = async (req, res) => {
   const userId = req.session.userId;
