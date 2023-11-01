@@ -16,13 +16,13 @@ export const Login = async (req, res) => {
 
     // Jika pengguna tidak ditemukan, kirim respons 404
     if (!user) {
-      return res.status(404).json({ msg: "User tidak ditemukan" });
+      return res.status(404).json({ msg: "User tidak ditemukan!!" });
     }
 
     // Memverifikasi kata sandi
     const isPasswordValid = await argon2.verify(user.password, password);
     if (!isPasswordValid) {
-      return res.status(400).json({ msg: "Wrong Password" });
+      return res.status(400).json({ msg: "Password Salah!!" });
     }
 
     // Jika autentikasi berhasil, simpan ID pengguna di sesi
@@ -101,9 +101,12 @@ export const resetPassword = async (req, res) => {
 export const logOut = async (req, res) => {
   const userId = req.session.userId;
   const user = await Users.findOne({ where: { id: userId } });
+  if (!req.session.userId) {
+    return res.status(401).json({ msg: "Anda belum masuk atau sesi tidak aktif." });
+  }
   req.session.destroy((err) => {
     if (err) {
-      return res.status(400).json({ msg: "Tidak dapat logout" });
+      return res.status(300).json({ msg: "Tidak dapat logout" });
     }
 
     if (!user) {

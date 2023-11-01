@@ -33,7 +33,12 @@ const Pengajuan = db.define('Pengajuan',{
     },
     total_harga:{
         type: DataTypes.STRING
-    }
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
+    },
 },{
     freezeTableName: true,
     timestamps: true

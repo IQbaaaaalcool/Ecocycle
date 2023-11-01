@@ -1,5 +1,6 @@
 import Pengajuan from '../models/ModelsPengajuan.js';
 import Users from '../models/UserModels.js';
+import Pengajuans from '../models/ModelsPengajuan.js';
 
 export const getRiwayatSendiri = async(req, res) => {
   if (!req.session.userId) {
@@ -35,6 +36,31 @@ export const getRiwayatSampah = async (req, res) => {
   } catch (error) {
     console.error('Error retrieving data:', error);
     res.status(500).json({ message: 'Error retrieving data' });
+  }
+}
+
+export const createAlamat = async (req, res) => {
+  try {
+    const { name, email, nik } = req.session;
+
+    if (!name || !email || !nik) {
+      return res.status(400).json({ message: "Data Pengguna tidak ada " });
+    }
+
+    const { alamat, no_hp } = req.body;
+
+    const newAddress = await Users.create({
+      name,
+      nik,
+      email,
+      alamat,
+      no_hp
+    });
+
+    res.json(newAddress);
+  } catch (error) {
+    console.error('Error creating alamat:', error);
+    res.status(500).json({ message: 'Error creating alamat' });
   }
 }
 
@@ -83,6 +109,7 @@ export const createPengajuan = async (req, res) => {
       metode_pembayaran,
       biaya_akomodasi: biaya_akomodasi.toString(),
       total_harga: total_harga.toString(),
+      status: 'pending'
     });
 
     res.json(newPengajuan);
@@ -90,4 +117,33 @@ export const createPengajuan = async (req, res) => {
     console.error('Error creating pengajuan:', error);
     res.status(500).json({ message: 'Error creating pengajuan' });
   }
+};
+
+export const approvePengajuan = async (req, res) => {
+    try {
+      const { pengajuanId } = req.params;
+      const { isApproved } = req.body;
+      const pengajuan = await Pengajuan.findByPk(pengajuanId);
+
+      if (!pengajuan) {
+        return res.status(404).json({ message: 'Pengajuan tidak ditemukan' });
+      }
+
+      // Memproses persetujuan atau penolakan
+      if (isApproved) {
+        pengajuan.status = 'approved';
+        // Lanjutkan dengan langkah-langkah untuk mengizinkan data ini
+      } else {
+        pengajuan.status = 'rejected';
+        // Mungkin Anda ingin memberikan alasan penolakan
+        pengajuan.reasonForRejection = req.body.reason;
+      }
+
+      await pengajuan.save();
+
+      res.json({ message: 'Pengajuan berhasil diproses' });
+    } catch (error) {
+      console.error('Error dalam proses persetujuan:', error);
+      res.status(500).json({ message: 'Terjadi kesalahan dalam proses persetujuan' });
+    }
 };

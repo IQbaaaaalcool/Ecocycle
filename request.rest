@@ -1,6 +1,6 @@
 GET http://localhost:5000/users
 ###
-GET http://127.0.0.1:5000/blog
+GET http://localhost:5000/blog
 
 ###
 POST http://localhost:5000/register
@@ -8,10 +8,10 @@ Content-Type: application/json
 
 {
     "nik": "35516636551",
-    "name": "iwan",
-    "email": "iwan@gmail.com",
-    "password": "admin123",
-    "confPassword": "admin123",
+    "name": "maulanaa1123",
+    "email": "maulanaa@gmail.com",
+    "password": "admin12",
+    "confPassword": "admin12",
     "role": ""
 }
 
@@ -32,8 +32,8 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "name": "iwan",
-    "password": "123"
+    "name": "fadli",
+    "password": "fadli"
 }
 
 ###
@@ -54,18 +54,29 @@ Content-Type: application/json
 }
 
 ###
-GET  http://localhost:5000/pengajuan
+GET http://localhost:5000/pengajuan
+###
+POST http://localhost:5000/pengajuann/93fa7404-d4a0-4967-8441-0177c2e54d7a
 
 ###
-GET  http://localhost:5000/pengajuans
+POST http://localhost:5000/pengajuann
+Content-Type: application/json
+
+{
+    "alamat": "jln kebon jeruk 18",
+    "no_hp": 0818818181172
+}
+
+###
+GET http://localhost:5000/pengajuans
 ###
 POST http://localhost:5000/pengajuan
 Content-Type: application/json
 
 {
-    "banyak_sampah_kg": 13,
+    "banyak_sampah_kg": 90,
     "metode_pembayaran": "cod"
 }
 
 ###
-DELETE http://localhost:5000/logout 
+DELETE http://localhost:5000/log

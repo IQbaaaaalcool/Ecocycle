@@ -4,6 +4,7 @@ export const Acces = async (req, res, next) => {
         next();
     } else {
         // Pengguna belum login, kirim respons dengan status 401 (Unauthorized)
+        // res.redirect('/login');
         res.status(401).json({ message: 'Anda harus login untuk mengakses rute ini' });
     }  
 }

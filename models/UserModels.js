@@ -51,15 +51,15 @@ const Users = db.define('users',{
             notEmpty: true
         }
     },
+    alamat: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
     resetPasswordToken: {
         type: DataTypes.STRING, // Kolom untuk menyimpan token reset password
     },
     resetPasswordExpires: {
         type: DataTypes.DATE, // Kolom untuk menyimpan waktu kadaluwarsa token
-    },
-    alamat: {
-        type: DataTypes.STRING,
-        allowNull: true,
     },
     saldo_poin: {
         type: DataTypes.STRING
